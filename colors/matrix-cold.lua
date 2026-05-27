@@ -1,13 +1,16 @@
--- Limpa os destaques anteriores e redefine a sintaxe
+-- Clears previous highlights and resets syntax
 vim.cmd("hi clear")
 if vim.fn.exists("syntax_on") == 1 then
 	vim.cmd("syntax reset")
 end
 
--- Define o nome oficial do tema para o Neovim reconhecer
+-- Sets the official theme name
 vim.g.colors_name = "matrix-cold"
 
--- Dicionário de cores (Preto absoluto ao Branco puro, com rampa verde)
+-- Configuration toggles
+local use_italic = vim.g.matrix_italic ~= false
+
+-- Color dictionary (Absolute Black to Pure White, with green ramp and grays for contrast)
 local colors = {
 	black       = "#000000",
 	dark_green  = "#003311",
@@ -16,11 +19,13 @@ local colors = {
 	neon_green  = "#00ff41",
 	light_green = "#88ffaa",
 	white       = "#ffffff",
+	gray        = "#666666",
+	light_gray  = "#aaaaaa",
 }
 
--- Mapeamento dos grupos de destaque (Highlights)
+-- Highlight groups mapping
 local highlights = {
-	-- Interface Base
+	-- Base Interface
 	Normal                = { bg = colors.black, fg = colors.neon_green },
 	NonText               = { fg = colors.dark_green },
 	EndOfBuffer           = { fg = colors.black },
@@ -36,24 +41,24 @@ local highlights = {
 	SignColumn            = { bg = colors.black },
 	WinSeparator          = { fg = colors.dark_green },
 
-	-- Alertas e Mensagens
+	-- Alerts and Messages
 	ErrorMsg              = { bg = colors.white, fg = colors.black },
 	WarningMsg            = { fg = colors.white, bold = true },
 	MoreMsg               = { fg = colors.neon_green, bold = true },
 	Question              = { fg = colors.neon_green, bold = true },
 
-	-- Menu Flutuante (Autocomplete)
+	-- Floating Menu (Autocomplete)
 	Pmenu                 = { bg = "#001105", fg = colors.green },
 	PmenuSel              = { bg = colors.neon_green, fg = colors.black, bold = true },
 	PmenuSbar             = { bg = colors.black },
 	PmenuThumb            = { bg = colors.dark_green },
 
-	-- Sintaxe de Código
-	Comment               = { fg = colors.mid_green, italic = true },
+	-- Code Syntax
+	Comment               = { fg = colors.gray, italic = use_italic },
 	Constant              = { fg = colors.light_green },
 	String                = { fg = colors.green },
-	Number                = { fg = colors.light_green },
-	Boolean               = { fg = colors.light_green },
+	Number                = { fg = colors.light_gray },
+	Boolean               = { fg = colors.light_gray },
 	Identifier            = { fg = colors.neon_green },
 	Function              = { fg = colors.neon_green, bold = true },
 	Statement             = { fg = colors.neon_green, bold = true },
@@ -65,7 +70,7 @@ local highlights = {
 	Error                 = { bg = colors.white, fg = colors.black },
 	Todo                  = { bg = colors.dark_green, fg = colors.white, bold = true },
 
-	-- Integração Treesitter (Mapeamentos básicos para Neovim >= 0.8)
+	-- Treesitter Integration
 	["@comment"]          = { link = "Comment" },
 	["@string"]           = { link = "String" },
 	["@function"]         = { link = "Function" },
@@ -73,15 +78,16 @@ local highlights = {
 	["@variable"]         = { fg = colors.neon_green },
 	["@operator"]         = { link = "Operator" },
 	["@type"]             = { link = "Type" },
+	["@number"]           = { link = "Number" },
 
-	-- Integração Telescope (Opcional, caso utilize no ambiente)
+	-- Telescope Integration
 	TelescopeBorder       = { fg = colors.dark_green, bg = colors.black },
 	TelescopePromptBorder = { fg = colors.neon_green, bg = colors.black },
 	TelescopeNormal       = { fg = colors.neon_green, bg = colors.black },
 	TelescopeSelection    = { bg = colors.dark_green, fg = colors.white },
 }
 
--- Iterador que aplica as configurações no Neovim
+-- Applies configurations to Neovim
 for group, opts in pairs(highlights) do
 	vim.api.nvim_set_hl(0, group, opts)
 end
