@@ -5,7 +5,7 @@ if vim.fn.exists("syntax_on") == 1 then
 end
 
 -- Define o nome oficial do tema para o Neovim reconhecer
-vim.g.colors_name = "matrix"
+vim.g.colors_name = "matrix-cold"
 
 -- Dicionário de cores (Preto absoluto ao Branco puro, com rampa verde)
 local colors = {
