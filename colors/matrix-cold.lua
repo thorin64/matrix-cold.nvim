@@ -35,9 +35,9 @@ local colors            = {
 	black        = "#000000", -- background
 	white        = "#ffffff", -- bright foreground / cursor text
 	cursor       = "#00661a", -- cursor color
-	cursor_fg    = "#00ff41", -- cursor text
-	selection_bg = "#00330d", -- selection background
-	selection_fg = "#009927", -- selection foreground
+	cursor_fg    = "#ffffff", -- cursor text
+	selection_bg = "#00661a", -- selection background
+	selection_fg = "#00ff41", -- selection foreground
 
 	gray         = "#959595", -- comments / dim text
 	dark0        = "#00330d", -- color0
