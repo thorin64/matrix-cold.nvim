@@ -34,8 +34,8 @@ local use_italic        = vim.g.matrix_italic ~= false
 local colors            = {
 	black        = "#000000", -- background
 	white        = "#ffffff", -- bright foreground / cursor text
-	cursor       = "#00ff41", -- cursor color
-	cursor_fg    = "#ffffff", -- cursor text
+	cursor       = "#00661a", -- cursor color
+	cursor_fg    = "#00ff41", -- cursor text
 	selection_bg = "#00330d", -- selection background
 	selection_fg = "#009927", -- selection foreground
 
