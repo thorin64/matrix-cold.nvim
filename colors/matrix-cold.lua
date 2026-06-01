@@ -33,7 +33,7 @@ local use_italic        = vim.g.matrix_italic ~= false
 -- Core palette derived exactly from your global theme
 local colors            = {
 	black        = "#000000", -- background
-	white        = "#ffffff", -- bright foreground / cursor text
+	white        = "#00ff41", -- bright foreground / cursor text
 	cursor       = "#00661a", -- cursor color
 	cursor_fg    = "#ffffff", -- cursor text
 	selection_bg = "#00661a", -- selection background
