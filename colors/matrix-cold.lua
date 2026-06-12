@@ -1,16 +1,12 @@
---1 matrix_cold.lua
--- A full Neovim IDE colorscheme based on the global system theme.
--- Clears all existing highlights and resets syntax.
-
+-- matrix_cold.lua
 vim.cmd("hi clear")
 if vim.fn.exists("syntax_on") == 1 then
 	vim.cmd("syntax reset")
 end
 
--- Set the theme name
 vim.g.colors_name       = "matrix_cold"
 
--- Terminal color palette (for :terminal), matching the global theme
+-- Terminal colors - SUA PALETA EXATA
 vim.g.terminal_color_0  = "#002a0a"
 vim.g.terminal_color_1  = "#005515"
 vim.g.terminal_color_2  = "#008020"
@@ -28,10 +24,9 @@ vim.g.terminal_color_13 = "#6bf07f"
 vim.g.terminal_color_14 = "#95f99f"
 vim.g.terminal_color_15 = "#ffffff"
 
--- Italic toggle (set `vim.g.matrix_italic = false` to disable italics)
 local use_italic        = vim.g.matrix_italic ~= false
 
--- Core palette derived from the global theme (brilho reduzido)
+-- Core palette - SUA PALETA
 local colors            = {
 	black        = "#000000",
 	white        = "#ffffff",
@@ -55,12 +50,11 @@ local colors            = {
 }
 
 -- =============================================================================
---  HIGHLIGHT GROUPS
--- =============================================================================
 local highlights        = {
 
 	------------------------- BASE UI -------------------------
-	Normal                            = { bg = colors.black, fg = colors.white },
+	Normal                            = { bg = colors.black, fg = colors.neon },
+	NormalFloat                       = { bg = colors.black, fg = colors.neon },
 	NonText                           = { fg = colors.dark0 },
 	EndOfBuffer                       = { fg = colors.black },
 	LineNr                            = { fg = colors.dark2 },
@@ -85,9 +79,9 @@ local highlights        = {
 	Directory                         = { fg = colors.neon, bold = true },
 
 	------------------------- STATUS & TABLINES -------------------------
-	StatusLine                        = { bg = colors.dark0, fg = colors.white },
+	StatusLine                        = { bg = colors.dark0, fg = colors.neon },
 	StatusLineNC                      = { bg = colors.black, fg = colors.dark2 },
-	StatusLineTerm                    = { bg = colors.dark0, fg = colors.white },
+	StatusLineTerm                    = { bg = colors.dark0, fg = colors.neon },
 	StatusLineTermNC                  = { bg = colors.black, fg = colors.dark2 },
 	TabLine                           = { bg = colors.black, fg = colors.dark2 },
 	TabLineFill                       = { bg = colors.black },
@@ -95,7 +89,6 @@ local highlights        = {
 	VertSplit                         = { fg = colors.dark0 },
 
 	------------------------- FLOATING WINDOWS -------------------------
-	NormalFloat                       = { bg = colors.black, fg = colors.white },
 	FloatBorder                       = { fg = colors.dark0, bg = colors.black },
 	FloatTitle                        = { fg = colors.white, bg = colors.black, bold = true },
 
@@ -105,8 +98,10 @@ local highlights        = {
 	MoreMsg                           = { fg = colors.neon, bold = true },
 	Question                          = { fg = colors.neon, bold = true },
 	ModeMsg                           = { fg = colors.neon, bold = true },
-	MsgArea                           = { bg = colors.black, fg = colors.white },
+	MsgArea                           = { bg = colors.black, fg = colors.neon },
 	MsgSeparator                      = { fg = colors.dark0 },
+	CommandLine                       = { bg = colors.black, fg = colors.neon },
+	CmdlineMsg                        = { bg = colors.black, fg = colors.neon },
 
 	------------------------- COMPLETION MENU -------------------------
 	Pmenu                             = { bg = colors.dark0, fg = colors.white },
@@ -168,10 +163,10 @@ local highlights        = {
 	Special                           = { fg = colors.light2 },
 	SpecialChar                       = { fg = colors.light2 },
 	Tag                               = { fg = colors.light4 },
-	Delimiter                         = { fg = colors.neon }, -- parênteses/colchetes em verde
+	Delimiter                         = { fg = colors.light3 }, -- [] () {} em verde claro
 	SpecialComment                    = { fg = colors.gray, italic = true },
 	Debug                             = { fg = colors.light2 },
-	Todo                              = { fg = colors.light2, italic = true }, -- TODO em verde/itálico sem bg
+	Todo                              = { fg = colors.light2, italic = true },
 	Error                             = { bg = colors.white, fg = colors.black },
 	Underlined                        = { underline = true },
 
@@ -203,7 +198,7 @@ local highlights        = {
 
 	------------------------- TREESITTER -------------------------
 	["@comment"]                      = { link = "Comment" },
-	["@comment.todo"]                 = { fg = colors.light2, italic = true }, -- TODO em verde/itálico
+	["@comment.todo"]                 = { fg = colors.light2, italic = true },
 	["@error"]                        = { link = "Error" },
 
 	["@string"]                       = { link = "String" },
@@ -235,7 +230,7 @@ local highlights        = {
 	["@method"]                       = { fg = colors.neon },
 	["@constructor"]                  = { fg = colors.light2 },
 
-	["@variable"]                     = { fg = colors.white }, -- variáveis em branco
+	["@variable"]                     = { fg = colors.white },
 	["@variable.builtin"]             = { fg = colors.light2 },
 	["@variable.parameter"]           = { fg = colors.light4 },
 
@@ -243,9 +238,9 @@ local highlights        = {
 	["@field"]                        = { fg = colors.light4 },
 
 	["@operator"]                     = { fg = colors.light2 },
-	["@punctuation"]                  = { fg = colors.neon }, -- pontuação em verde
-	["@punctuation.delimiter"]        = { fg = colors.neon }, -- delimitadores em verde
-	["@punctuation.bracket"]          = { fg = colors.neon }, -- colchetes em verde
+	["@punctuation"]                  = { fg = colors.light3 }, -- delimitadores verdes
+	["@punctuation.delimiter"]        = { fg = colors.light3 },
+	["@punctuation.bracket"]          = { fg = colors.light3 },
 	["@punctuation.special"]          = { fg = colors.light2 },
 
 	["@tag"]                          = { fg = colors.light4 },
@@ -255,7 +250,7 @@ local highlights        = {
 	["@namespace"]                    = { fg = colors.neon },
 	["@module"]                       = { fg = colors.neon },
 
-	["@text"]                         = { fg = colors.white },
+	["@text"]                         = { fg = colors.neon },
 	["@text.strong"]                  = { fg = colors.white, bold = true },
 	["@text.emphasis"]                = { fg = colors.light2, italic = use_italic },
 	["@text.underline"]               = { underline = true },
@@ -267,7 +262,7 @@ local highlights        = {
 	["@text.reference"]               = { fg = colors.neon },
 	["@text.environment"]             = { fg = colors.neon },
 	["@text.environment.name"]        = { fg = colors.neon },
-	["@text.todo"]                    = { fg = colors.light2, italic = true }, -- TODO em verde/itálico
+	["@text.todo"]                    = { fg = colors.light2, italic = true },
 	["@text.note"]                    = { fg = colors.light2 },
 	["@text.warning"]                 = { fg = colors.white },
 	["@text.danger"]                  = { fg = colors.white },
@@ -281,7 +276,7 @@ local highlights        = {
 	TelescopePromptBorder             = { fg = colors.dark0, bg = colors.black },
 	TelescopeTitle                    = { fg = colors.white, bg = colors.black, bold = true },
 	TelescopePromptTitle              = { fg = colors.white, bg = colors.black, bold = true },
-	TelescopeNormal                   = { fg = colors.white, bg = colors.black },
+	TelescopeNormal                   = { fg = colors.neon, bg = colors.black },
 	TelescopeSelection                = { bg = colors.dark0, fg = colors.white },
 	TelescopeMatching                 = { fg = colors.neon },
 	TelescopePreviewNormal            = { bg = colors.black },
@@ -295,12 +290,12 @@ local highlights        = {
 	TelescopeSelectionCaret           = { fg = colors.neon },
 
 	------------------------- PLUGIN: nvim-cmp -------------------------
-	CmpItemAbbr                       = { fg = colors.white },
-	CmpItemAbbrMatch                  = { fg = colors.neon },
+	CmpItemAbbr                       = { fg = colors.neon },
+	CmpItemAbbrMatch                  = { fg = colors.white, bold = true },
 	CmpItemAbbrMatchFuzzy             = { fg = colors.light2 },
 	CmpItemKind                       = { fg = colors.neon },
 	CmpItemMenu                       = { fg = colors.gray },
-	CmpItemKindDefault                = { fg = colors.white },
+	CmpItemKindDefault                = { fg = colors.neon },
 	CmpItemKindKeyword                = { fg = colors.neon },
 	CmpItemKindVariable               = { fg = colors.white },
 	CmpItemKindField                  = { fg = colors.light4 },
@@ -319,67 +314,67 @@ local highlights        = {
 	CmpItemKindText                   = { fg = colors.light2 },
 	CmpItemKindUnit                   = { fg = colors.neon },
 	CmpItemKindFolder                 = { fg = colors.neon },
-	CmpItemKindFile                   = { fg = colors.white },
+	CmpItemKindFile                   = { fg = colors.neon },
 	CmpItemKindReference              = { fg = colors.neon },
 	CmpItemKindColor                  = { fg = colors.light2 },
 	CmpItemKindValue                  = { fg = colors.neon },
 	CmpItemKindOperator               = { fg = colors.light2 },
 
 	------------------------- PLUGIN: nvim-tree -------------------------
-	NvimTreeNormal                    = { bg = colors.black, fg = colors.white },
+	NvimTreeNormal                    = { bg = colors.black, fg = colors.neon },
 	NvimTreeEndOfBuffer               = { fg = colors.black },
-	NvimTreeRootFolder                = { fg = colors.neon },
-	NvimTreeFolderName                = { fg = colors.white },
-	NvimTreeFolderIcon                = { fg = colors.neon },
-	NvimTreeOpenedFolderName          = { fg = colors.neon },
+	NvimTreeRootFolder                = { fg = colors.neon, bold = true },
+	NvimTreeFolderName                = { fg = colors.neon },
+	NvimTreeFolderIcon                = { fg = colors.mid },
+	NvimTreeOpenedFolderName          = { fg = colors.white, bold = true },
 	NvimTreeEmptyFolderName           = { fg = colors.gray },
 	NvimTreeIndentMarker              = { fg = colors.dark0 },
 	NvimTreeVertSplit                 = { fg = colors.dark0 },
 	NvimTreeSymlink                   = { fg = colors.light2 },
-	NvimTreeExecFile                  = { fg = colors.neon },
-	NvimTreeSpecialFile               = { fg = colors.neon },
+	NvimTreeExecFile                  = { fg = colors.light1, bold = true },
+	NvimTreeSpecialFile               = { fg = colors.mid, bold = true },
 	NvimTreeImageFile                 = { fg = colors.light2 },
-	NvimTreeGitDirty                  = { fg = colors.neon },
+	NvimTreeGitDirty                  = { fg = colors.mid },
 	NvimTreeGitStaged                 = { fg = colors.light2 },
 	NvimTreeGitNew                    = { fg = colors.neon },
 	NvimTreeGitRenamed                = { fg = colors.light1 },
 	NvimTreeGitDeleted                = { fg = colors.white },
 
 	------------------------- PLUGIN: lualine -------------------------
-	lualine_a_normal                  = { bg = colors.neon, fg = colors.black },
-	lualine_b_normal                  = { bg = colors.black, fg = colors.white },
-	lualine_c_normal                  = { bg = colors.black, fg = colors.white },
-	lualine_a_insert                  = { bg = colors.light2, fg = colors.black },
-	lualine_b_insert                  = { bg = colors.black, fg = colors.white },
-	lualine_c_insert                  = { bg = colors.black, fg = colors.white },
-	lualine_a_visual                  = { bg = colors.selection_bg, fg = colors.white },
-	lualine_b_visual                  = { bg = colors.black, fg = colors.white },
-	lualine_c_visual                  = { bg = colors.black, fg = colors.white },
-	lualine_a_replace                 = { bg = colors.white, fg = colors.black },
-	lualine_b_replace                 = { bg = colors.black, fg = colors.white },
-	lualine_c_replace                 = { bg = colors.black, fg = colors.white },
-	lualine_a_command                 = { bg = colors.light2, fg = colors.black },
-	lualine_b_command                 = { bg = colors.light4, fg = colors.black },
-	lualine_c_command                 = { bg = colors.black, fg = colors.white },
+	lualine_a_normal                  = { bg = colors.neon, fg = colors.black, bold = true },
+	lualine_b_normal                  = { bg = colors.black, fg = colors.neon },
+	lualine_c_normal                  = { bg = colors.black, fg = colors.neon },
+	lualine_a_insert                  = { bg = colors.light2, fg = colors.black, bold = true },
+	lualine_b_insert                  = { bg = colors.black, fg = colors.neon },
+	lualine_c_insert                  = { bg = colors.black, fg = colors.neon },
+	lualine_a_visual                  = { bg = colors.selection_bg, fg = colors.white, bold = true },
+	lualine_b_visual                  = { bg = colors.black, fg = colors.neon },
+	lualine_c_visual                  = { bg = colors.black, fg = colors.neon },
+	lualine_a_replace                 = { bg = colors.white, fg = colors.black, bold = true },
+	lualine_b_replace                 = { bg = colors.black, fg = colors.neon },
+	lualine_c_replace                 = { bg = colors.black, fg = colors.neon },
+	lualine_a_command                 = { bg = colors.mid, fg = colors.black, bold = true }, -- COMMAND em verde
+	lualine_b_command                 = { bg = colors.black, fg = colors.neon },
+	lualine_c_command                 = { bg = colors.black, fg = colors.neon },
 	lualine_a_inactive                = { bg = colors.black, fg = colors.gray },
 	lualine_b_inactive                = { bg = colors.black, fg = colors.gray },
 	lualine_c_inactive                = { bg = colors.black, fg = colors.gray },
 	lualine_transitional_a            = { bg = colors.dark0, fg = colors.white },
-	lualine_transitional_b            = { bg = colors.black, fg = colors.white },
-	lualine_transitional_c            = { bg = colors.black, fg = colors.white },
+	lualine_transitional_b            = { bg = colors.black, fg = colors.neon },
+	lualine_transitional_c            = { bg = colors.black, fg = colors.neon },
 
 	------------------------- PLUGIN: bufferline -------------------------
 	BufferLineBackground              = { bg = colors.black, fg = colors.dark2 },
-	BufferLineBufferSelected          = { bg = colors.dark0, fg = colors.white },
-	BufferLineBufferVisible           = { bg = colors.black, fg = colors.white },
+	BufferLineBufferSelected          = { bg = colors.dark0, fg = colors.white, bold = true },
+	BufferLineBufferVisible           = { bg = colors.black, fg = colors.neon },
 	BufferLineCloseButton             = { fg = colors.gray },
 	BufferLineCloseButtonSelected     = { fg = colors.white },
 	BufferLineTab                     = { bg = colors.black, fg = colors.dark2 },
-	BufferLineTabSelected             = { bg = colors.dark0, fg = colors.white },
+	BufferLineTabSelected             = { bg = colors.dark0, fg = colors.white, bold = true },
 	BufferLineIndicatorSelected       = { fg = colors.neon },
 	BufferLineSeparator               = { fg = colors.dark0 },
-	BufferLineModified                = { fg = colors.neon },
-	BufferLineModifiedSelected        = { fg = colors.neon },
+	BufferLineModified                = { fg = colors.mid },
+	BufferLineModifiedSelected        = { fg = colors.mid, bold = true },
 	BufferLineDuplicate               = { fg = colors.gray },
 	BufferLineDuplicateSelected       = { fg = colors.gray },
 	BufferLinePick                    = { fg = colors.white },
@@ -403,28 +398,28 @@ local highlights        = {
 	IndentBlanklineSpaceCharBlankline = { fg = colors.black },
 
 	------------------------- PLUGIN: which-key -------------------------
-	WhichKey                          = { fg = colors.white },
+	WhichKey                          = { fg = colors.neon },
 	WhichKeyDesc                      = { fg = colors.gray },
 	WhichKeySeparator                 = { fg = colors.dark0 },
 	WhichKeyGroup                     = { fg = colors.neon },
-	WhichKeyFloat                     = { bg = colors.black, fg = colors.white },
+	WhichKeyFloat                     = { bg = colors.black, fg = colors.neon },
 	WhichKeyBorder                    = { fg = colors.dark0 },
 
 	------------------------- PLUGIN: noice -------------------------
 	NoiceCmdlinePopupBorder           = { fg = colors.dark0, bg = colors.black },
-	NoiceCmdlinePopupTitle            = { fg = colors.white, bg = colors.black },
+	NoiceCmdlinePopupTitle            = { fg = colors.white, bold = true },
 	NoiceCmdlineIcon                  = { fg = colors.neon },
 	NoicePopupBorder                  = { fg = colors.dark0, bg = colors.black },
 	NoiceMiniPopupBorder              = { fg = colors.dark0 },
 
 	------------------------- PLUGIN: dashboard / alpha -------------------------
-	AlphaHeader                       = { fg = colors.neon },
-	AlphaButtons                      = { fg = colors.neon },
-	AlphaShortcut                     = { fg = colors.white },
+	AlphaHeader                       = { fg = colors.neon, bold = true },
+	AlphaButtons                      = { fg = colors.mid },
+	AlphaShortcut                     = { fg = colors.white, bold = true },
 	AlphaFooter                       = { fg = colors.gray },
-	DashboardHeader                   = { fg = colors.neon },
-	DashboardCenter                   = { fg = colors.white },
-	DashboardShortcut                 = { fg = colors.white },
+	DashboardHeader                   = { fg = colors.neon, bold = true },
+	DashboardCenter                   = { fg = colors.neon },
+	DashboardShortcut                 = { fg = colors.white, bold = true },
 	DashboardFooter                   = { fg = colors.gray },
 
 	------------------------- PLUGIN: nvim-notify -------------------------
@@ -433,11 +428,11 @@ local highlights        = {
 	NotifyINFOBorder                  = { fg = colors.mid },
 	NotifyHINTBorder                  = { fg = colors.light2 },
 	NotifyTRACEBorder                 = { fg = colors.gray },
-	NotifyERRORTitle                  = { fg = colors.white },
-	NotifyWARNTitle                   = { fg = colors.neon },
-	NotifyINFOTitle                   = { fg = colors.mid },
-	NotifyHINTTitle                   = { fg = colors.light2 },
-	NotifyTRACETitle                  = { fg = colors.gray },
+	NotifyERRORTitle                  = { fg = colors.white, bold = true },
+	NotifyWARNTitle                   = { fg = colors.neon, bold = true },
+	NotifyINFOTitle                   = { fg = colors.mid, bold = true },
+	NotifyHINTTitle                   = { fg = colors.light2, bold = true },
+	NotifyTRACETitle                  = { fg = colors.gray, bold = true },
 	NotifyERRORBody                   = { fg = colors.white },
 	NotifyWARNBody                    = { fg = colors.neon },
 	NotifyINFOBody                    = { fg = colors.mid },
@@ -455,23 +450,23 @@ local highlights        = {
 	IlluminatedWordWrite              = { bg = colors.dark0 },
 
 	------------------------- PLUGIN: hop / leap / lightspeed -------------------------
-	HopNextKey                        = { fg = colors.white },
-	HopNextKey1                       = { fg = colors.neon },
+	HopNextKey                        = { fg = colors.white, bold = true },
+	HopNextKey1                       = { fg = colors.neon, bold = true },
 	HopNextKey2                       = { fg = colors.mid },
-	LeapMatch                         = { fg = colors.white, bg = colors.dark0 },
-	LeapLabelPrimary                  = { fg = colors.black, bg = colors.neon },
+	LeapMatch                         = { fg = colors.white, bold = true, bg = colors.dark0 },
+	LeapLabelPrimary                  = { fg = colors.black, bg = colors.neon, bold = true },
 	LeapLabelSecondary                = { fg = colors.black, bg = colors.mid },
-	LightspeedLabel                   = { fg = colors.black, bg = colors.neon },
-	LightspeedShortcut                = { fg = colors.white },
+	LightspeedLabel                   = { fg = colors.black, bg = colors.neon, bold = true },
+	LightspeedShortcut                = { fg = colors.white, bold = true },
 
 	------------------------- PLUGIN: trouble -------------------------
-	TroubleCount                      = { fg = colors.white },
+	TroubleCount                      = { fg = colors.white, bold = true },
 	TroubleNormal                     = { bg = colors.black },
 	TroubleBorder                     = { fg = colors.dark0 },
-	TroubleText                       = { fg = colors.white },
+	TroubleText                       = { fg = colors.neon },
 	TroubleIndent                     = { fg = colors.dark0 },
 	TroubleSource                     = { fg = colors.gray },
-	TroubleCode                       = { fg = colors.neon },
+	TroubleCode                       = { fg = colors.mid },
 
 	------------------------- PLUGIN: nvim-scrollbar -------------------------
 	ScrollbarHandle                   = { bg = colors.dark0 },
@@ -483,19 +478,18 @@ local highlights        = {
 	ScrollbarCursorHandle             = { bg = colors.cursor },
 
 	------------------------- PLUGIN: fidget -------------------------
-	FidgetTitle                       = { fg = colors.white },
+	FidgetTitle                       = { fg = colors.white, bold = true },
 	FidgetTask                        = { fg = colors.neon },
 	FidgetWindow                      = { bg = colors.black },
 
 	------------------------- PLUGIN: neo-tree -------------------------
-	NeoTreeNormal                     = { bg = colors.black, fg = colors.white },
-	NeoTreeTitleBar                   = { fg = colors.white, bg = colors.dark0 },
-	NeoTreeFileName                   = { fg = colors.white },
-	NeoTreeDirectoryName              = { fg = colors.neon },
+	NeoTreeNormal                     = { bg = colors.black, fg = colors.neon },
+	NeoTreeTitleBar                   = { fg = colors.white, bg = colors.dark0, bold = true },
+	NeoTreeFileName                   = { fg = colors.neon },
+	NeoTreeDirectoryName              = { fg = colors.neon, bold = true },
 	NeoTreeFloatBorder                = { fg = colors.dark0, bg = colors.black },
 }
 
--- Apply all highlight groups
 for group, opts in pairs(highlights) do
 	vim.api.nvim_set_hl(0, group, opts)
 end
