@@ -136,42 +136,41 @@ local highlights        = {
 	SpellLocal                        = { sp = colors.light2, undercurl = true },
 
 	------------------------- SYNTAX -------------------------
-	-- Carefully differentiated shades of green for each semantic category
 	Comment                           = { fg = colors.gray, italic = use_italic },
-	Constant                          = { fg = colors.mid }, -- literal constants
-	String                            = { fg = colors.mid }, -- strings
+	Constant                          = { fg = colors.mid },
+	String                            = { fg = colors.mid },
 	Character                         = { fg = colors.mid },
-	Number                            = { fg = colors.light1 }, -- numbers
+	Number                            = { fg = colors.light1 },
 	Boolean                           = { fg = colors.neon, bold = true },
 	Float                             = { fg = colors.light1 },
 
-	Identifier                        = { fg = colors.light6 },     -- variables, identifiers
-	Function                          = { fg = colors.neon, bold = true }, -- function names
-	Statement                         = { fg = colors.neon, bold = true }, -- if, for, return
+	Identifier                        = { fg = colors.white }, -- variáveis em branco
+	Function                          = { fg = colors.neon, bold = true },
+	Statement                         = { fg = colors.neon, bold = true },
 	Conditional                       = { fg = colors.neon, bold = true },
 	Repeat                            = { fg = colors.neon, bold = true },
 	Label                             = { fg = colors.light1 },
-	Operator                          = { fg = colors.light2 },     -- +, -, etc.
-	Keyword                           = { fg = colors.neon, bold = true }, -- import, include
+	Operator                          = { fg = colors.light2 },
+	Keyword                           = { fg = colors.neon, bold = true },
 	Exception                         = { fg = colors.neon, bold = true },
 
-	PreProc                           = { fg = colors.light3 }, -- preprocessor
+	PreProc                           = { fg = colors.light3 },
 	Include                           = { fg = colors.light3 },
 	Define                            = { fg = colors.light3 },
 	Macro                             = { fg = colors.light3 },
 	PreCondit                         = { fg = colors.light3 },
 
-	Type                              = { fg = colors.neon, bold = true }, -- int, String, class names
+	Type                              = { fg = colors.neon, bold = true },
 	StorageClass                      = { fg = colors.neon, bold = true },
 	Structure                         = { fg = colors.neon, bold = true },
 	Typedef                           = { fg = colors.neon, bold = true },
 
-	Special                           = { fg = colors.white }, -- special symbols
-	SpecialChar                       = { fg = colors.white },
-	Tag                               = { fg = colors.light4 }, -- HTML tags
-	Delimiter                         = { fg = colors.light6 }, -- parentheses, brackets
+	Special                           = { fg = colors.light2 },
+	SpecialChar                       = { fg = colors.light2 },
+	Tag                               = { fg = colors.light4 },
+	Delimiter                         = { fg = colors.neon }, -- parênteses/colchetes em verde
 	SpecialComment                    = { fg = colors.gray },
-	Debug                             = { fg = colors.white },
+	Debug                             = { fg = colors.light2 },
 	Error                             = { bg = colors.white, fg = colors.black },
 	Todo                              = { bg = colors.dark0, fg = colors.white, bold = true },
 	Underlined                        = { underline = true },
@@ -203,12 +202,11 @@ local highlights        = {
 	LspSignatureActiveParameter       = { bg = colors.dark0, bold = true },
 
 	------------------------- TREESITTER -------------------------
-	-- Fine-grained semantic tokens with distinct greens
 	["@comment"]                      = { link = "Comment" },
 	["@error"]                        = { link = "Error" },
 
 	["@string"]                       = { link = "String" },
-	["@string.escape"]                = { fg = colors.white },
+	["@string.escape"]                = { fg = colors.light2 },
 	["@string.regex"]                 = { fg = colors.mid },
 	["@character"]                    = { link = "Character" },
 	["@number"]                       = { link = "Number" },
@@ -233,10 +231,10 @@ local highlights        = {
 	["@function"]                     = { fg = colors.neon, bold = true },
 	["@function.builtin"]             = { fg = colors.light1, bold = true },
 	["@function.macro"]               = { fg = colors.light3 },
-	["@method"]                       = { fg = colors.neon, bold = true }, -- distinct from functions
+	["@method"]                       = { fg = colors.neon, bold = true },
 	["@constructor"]                  = { fg = colors.light2, bold = true },
 
-	["@variable"]                     = { fg = colors.light6 },
+	["@variable"]                     = { fg = colors.white }, -- variáveis em branco
 	["@variable.builtin"]             = { fg = colors.light2 },
 	["@variable.parameter"]           = { fg = colors.light4 },
 
@@ -244,10 +242,10 @@ local highlights        = {
 	["@field"]                        = { fg = colors.light4 },
 
 	["@operator"]                     = { fg = colors.light2 },
-	["@punctuation"]                  = { fg = colors.light6 },
-	["@punctuation.delimiter"]        = { fg = colors.light6 },
-	["@punctuation.bracket"]          = { fg = colors.light6 },
-	["@punctuation.special"]          = { fg = colors.white },
+	["@punctuation"]                  = { fg = colors.neon }, -- pontuação em verde
+	["@punctuation.delimiter"]        = { fg = colors.neon }, -- delimitadores em verde
+	["@punctuation.bracket"]          = { fg = colors.neon }, -- colchetes em verde
+	["@punctuation.special"]          = { fg = colors.light2 },
 
 	["@tag"]                          = { fg = colors.light4 },
 	["@tag.delimiter"]                = { fg = colors.mid },
@@ -272,10 +270,6 @@ local highlights        = {
 	["@text.note"]                    = { fg = colors.light2, bold = true },
 	["@text.warning"]                 = { fg = colors.white, bold = true },
 	["@text.danger"]                  = { fg = colors.white, bold = true },
-
-	["@diff.plus"]                    = { fg = colors.light2 },
-	["@diff.minus"]                   = { fg = colors.white },
-	["@diff.delta"]                   = { fg = colors.mid },
 
 	------------------------- PLUGIN: Telescope -------------------------
 	TelescopeBorder                   = { fg = colors.dark0, bg = colors.black },
