@@ -18,7 +18,7 @@ vim.g.terminal_color_3  = "#00cc34"
 vim.g.terminal_color_4  = "#00ff41"
 vim.g.terminal_color_5  = "#33ff67"
 vim.g.terminal_color_6  = "#66ff8d"
-vim.g.terminal_color_7  = "#DDDDDD"
+vim.g.terminal_color_7  = "#959595"
 vim.g.terminal_color_8  = "#009927"
 vim.g.terminal_color_9  = "#00cc34"
 vim.g.terminal_color_10 = "#00ff41"
@@ -28,35 +28,64 @@ vim.g.terminal_color_13 = "#80ffa0"
 vim.g.terminal_color_14 = "#b3ffc6"
 vim.g.terminal_color_15 = "#ffffff"
 
+-- Italic toggle (set `vim.g.matrix_italic = false` to disable italics)
+local use_italic        = vim.g.matrix_italic ~= false
+
+-- Core palette derived from the global theme
+local colors            = {
+	black        = "#000000", -- main background
+	white        = "#ffffff", -- pure white for titles, errors, etc.
+	cursor       = "#009927", -- cursor color
+	cursor_fg    = "#ffffff", -- text color under cursor
+	selection_bg = "#00661a", -- visual selection background
+	selection_fg = "#00ff41", -- visual selection text
+
+	gray         = "#959595", -- comments, dim text
+	dark0        = "#00330d", -- very dark green (NonText, fold, etc.)
+	dark1        = "#00661a", -- dark green (numbers, floats)
+	dark2        = "#009927", -- medium-dark green (strings, line numbers)
+	mid          = "#00cc34", -- medium green (constants, booleans)
+	neon         = "#00ff41", -- main foreground (identifiers, functions)
+	light1       = "#1aff54", -- light green (types, statements)
+	light2       = "#33ff67", -- lighter green (operators, builtins)
+	light3       = "#4dff7a", -- even lighter (parameters, preprocessor)
+	light4       = "#66ff8d", -- pale green (properties, fields)
+	light5       = "#80ffa0", -- very pale green (unused but available)
+	light6       = "#b3ffc6", -- almost white green (unused but available)
+}
+
+-- =============================================================================
+--  HIGHLIGHT GROUPS
+-- =============================================================================
 local highlights        = {
 
 	------------------------- BASE UI -------------------------
-	Normal                            = { bg = colors.black, fg = colors.white }, -- código em branco
+	Normal                            = { bg = colors.black, fg = colors.white },
 	NonText                           = { fg = colors.dark0 },
-	EndOfBuffer                       = { fg = colors.black },
+	EndOfBuffer                       = { fg = colors.black }, -- hide ~ at buffer end
 	LineNr                            = { fg = colors.dark2 },
-	CursorLine                        = { bg = colors.dark0 },
+	CursorLine                        = { bg = colors.dark0 }, -- current line highlight
 	CursorLineNr                      = { fg = colors.white, bold = true },
-	Cursor                            = { bg = colors.cursor, fg = colors.black },
-	CursorColumn                      = { bg = colors.dark0 },
-	Visual                            = { bg = colors.selection_bg, fg = colors.white },
-	VisualNOS                         = { bg = colors.selection_bg, fg = colors.white },
+	Cursor                            = { bg = colors.cursor, fg = colors.cursor_fg },
+	CursorColumn                      = { bg = colors.dark0 }, -- cursor column highlight
+	Visual                            = { bg = colors.selection_bg, fg = colors.selection_fg },
+	VisualNOS                         = { bg = colors.selection_bg, fg = colors.selection_fg },
 	Search                            = { bg = colors.neon, fg = colors.black },
 	IncSearch                         = { bg = colors.white, fg = colors.black },
 	CurSearch                         = { bg = colors.light1, fg = colors.black, bold = true },
 	MatchParen                        = { bg = colors.dark0, fg = colors.white, bold = true },
-	ColorColumn                       = { bg = colors.dark0 },
-	SignColumn                        = { bg = colors.black },
-	WinSeparator                      = { fg = colors.dark0 },
+	ColorColumn                       = { bg = colors.dark0 }, -- e.g., at 80 chars
+	SignColumn                        = { bg = colors.black }, -- gutter background
+	WinSeparator                      = { fg = colors.dark0 }, -- window borders
 	FoldColumn                        = { bg = colors.black, fg = colors.gray },
 	Folded                            = { bg = colors.dark0, fg = colors.mid },
 	Conceal                           = { fg = colors.gray },
-	SpecialKey                        = { fg = colors.dark1 },
+	SpecialKey                        = { fg = colors.dark1 }, -- tabs, trailing spaces, etc.
 	Title                             = { fg = colors.white, bold = true },
 	Directory                         = { fg = colors.neon, bold = true },
 
 	------------------------- STATUS & TABLINES -------------------------
-	StatusLine                        = { bg = colors.dark0, fg = colors.white }, -- modo normal: branco
+	StatusLine                        = { bg = colors.dark0, fg = colors.white },
 	StatusLineNC                      = { bg = colors.black, fg = colors.dark2 },
 	StatusLineTerm                    = { bg = colors.dark0, fg = colors.white },
 	StatusLineTermNC                  = { bg = colors.black, fg = colors.dark2 },
@@ -82,7 +111,7 @@ local highlights        = {
 	------------------------- COMPLETION MENU -------------------------
 	Pmenu                             = { bg = colors.dark0, fg = colors.white },
 	PmenuSel                          = { bg = colors.neon, fg = colors.black, bold = true },
-	PmenuSbar                         = { bg = colors.black },
+	PmenuSbar                         = { bg = colors.black }, -- menu scrollbar
 	PmenuThumb                        = { bg = colors.dark0 },
 	WildMenu                          = { bg = colors.neon, fg = colors.black, bold = true },
 
@@ -107,39 +136,40 @@ local highlights        = {
 	SpellLocal                        = { sp = colors.light2, undercurl = true },
 
 	------------------------- SYNTAX -------------------------
+	-- Carefully differentiated shades of green for each semantic category
 	Comment                           = { fg = colors.gray, italic = use_italic },
-	Constant                          = { fg = colors.mid },
-	String                            = { fg = colors.mid },        -- verde
+	Constant                          = { fg = colors.mid }, -- literal constants
+	String                            = { fg = colors.mid }, -- strings
 	Character                         = { fg = colors.mid },
-	Number                            = { fg = colors.light1 },     -- verde claro
-	Boolean                           = { fg = colors.neon, bold = true }, -- verde neon
+	Number                            = { fg = colors.light1 }, -- numbers
+	Boolean                           = { fg = colors.neon, bold = true },
 	Float                             = { fg = colors.light1 },
 
-	Identifier                        = { fg = colors.light6 },     -- quase branco
-	Function                          = { fg = colors.neon, bold = true }, -- verde
-	Statement                         = { fg = colors.neon, bold = true }, -- verde (if, for, return)
+	Identifier                        = { fg = colors.light6 },     -- variables, identifiers
+	Function                          = { fg = colors.neon, bold = true }, -- function names
+	Statement                         = { fg = colors.neon, bold = true }, -- if, for, return
 	Conditional                       = { fg = colors.neon, bold = true },
 	Repeat                            = { fg = colors.neon, bold = true },
 	Label                             = { fg = colors.light1 },
-	Operator                          = { fg = colors.light2 },     -- verde claro
-	Keyword                           = { fg = colors.neon, bold = true }, -- verde (import, include)
+	Operator                          = { fg = colors.light2 },     -- +, -, etc.
+	Keyword                           = { fg = colors.neon, bold = true }, -- import, include
 	Exception                         = { fg = colors.neon, bold = true },
 
-	PreProc                           = { fg = colors.light3 },
+	PreProc                           = { fg = colors.light3 }, -- preprocessor
 	Include                           = { fg = colors.light3 },
 	Define                            = { fg = colors.light3 },
 	Macro                             = { fg = colors.light3 },
 	PreCondit                         = { fg = colors.light3 },
 
-	Type                              = { fg = colors.neon, bold = true }, -- verde (int, String)
+	Type                              = { fg = colors.neon, bold = true }, -- int, String, class names
 	StorageClass                      = { fg = colors.neon, bold = true },
 	Structure                         = { fg = colors.neon, bold = true },
 	Typedef                           = { fg = colors.neon, bold = true },
 
-	Special                           = { fg = colors.white },
+	Special                           = { fg = colors.white }, -- special symbols
 	SpecialChar                       = { fg = colors.white },
-	Tag                               = { fg = colors.light4 },
-	Delimiter                         = { fg = colors.light6 }, -- quase branco
+	Tag                               = { fg = colors.light4 }, -- HTML tags
+	Delimiter                         = { fg = colors.light6 }, -- parentheses, brackets
 	SpecialComment                    = { fg = colors.gray },
 	Debug                             = { fg = colors.white },
 	Error                             = { bg = colors.white, fg = colors.black },
@@ -148,10 +178,10 @@ local highlights        = {
 
 	------------------------- LSP DIAGNOSTICS -------------------------
 	DiagnosticError                   = { fg = colors.white },
-	DiagnosticWarn                    = { fg = colors.light2 },
+	DiagnosticWarn                    = { fg = colors.light2 }, -- dark green for warnings
 	DiagnosticInfo                    = { fg = colors.mid },
 	DiagnosticHint                    = { fg = colors.light2 },
-	DiagnosticUnderlineError          = { sp = colors.white, undercurl = true },
+	DiagnosticUnderlineError          = { sp = colors.white, undercurl = true }, -- white wavy underline
 	DiagnosticUnderlineWarn           = { sp = colors.light2, undercurl = true },
 	DiagnosticUnderlineInfo           = { sp = colors.mid, undercurl = true },
 	DiagnosticUnderlineHint           = { sp = colors.light2, undercurl = true },
@@ -173,6 +203,7 @@ local highlights        = {
 	LspSignatureActiveParameter       = { bg = colors.dark0, bold = true },
 
 	------------------------- TREESITTER -------------------------
+	-- Fine-grained semantic tokens with distinct greens
 	["@comment"]                      = { link = "Comment" },
 	["@error"]                        = { link = "Error" },
 
@@ -202,10 +233,10 @@ local highlights        = {
 	["@function"]                     = { fg = colors.neon, bold = true },
 	["@function.builtin"]             = { fg = colors.light1, bold = true },
 	["@function.macro"]               = { fg = colors.light3 },
-	["@method"]                       = { fg = colors.neon, bold = true },
+	["@method"]                       = { fg = colors.neon, bold = true }, -- distinct from functions
 	["@constructor"]                  = { fg = colors.light2, bold = true },
 
-	["@variable"]                     = { fg = colors.light6 }, -- quase branco
+	["@variable"]                     = { fg = colors.light6 },
 	["@variable.builtin"]             = { fg = colors.light2 },
 	["@variable.parameter"]           = { fg = colors.light4 },
 
@@ -265,6 +296,7 @@ local highlights        = {
 	TelescopeSelectionCaret           = { fg = colors.neon },
 
 	------------------------- PLUGIN: nvim-cmp -------------------------
+	-- Differentiate completion item kinds with distinct greens
 	CmpItemAbbr                       = { fg = colors.white },
 	CmpItemAbbrMatch                  = { fg = colors.neon, bold = true },
 	CmpItemAbbrMatchFuzzy             = { fg = colors.light2 },
@@ -316,10 +348,10 @@ local highlights        = {
 	NvimTreeGitDeleted                = { fg = colors.white },
 
 	------------------------- PLUGIN: lualine -------------------------
-	lualine_a_normal                  = { bg = colors.neon, fg = colors.black, bold = true }, -- modo normal: verde
+	lualine_a_normal                  = { bg = colors.neon, fg = colors.black, bold = true },
 	lualine_b_normal                  = { bg = colors.black, fg = colors.white },
 	lualine_c_normal                  = { bg = colors.black, fg = colors.white },
-	lualine_a_insert                  = { bg = colors.light2, fg = colors.black, bold = true }, -- insert: verde claro
+	lualine_a_insert                  = { bg = colors.light2, fg = colors.black, bold = true },
 	lualine_b_insert                  = { bg = colors.black, fg = colors.white },
 	lualine_c_insert                  = { bg = colors.black, fg = colors.white },
 	lualine_a_visual                  = { bg = colors.selection_bg, fg = colors.white, bold = true },
@@ -464,3 +496,8 @@ local highlights        = {
 	NeoTreeDirectoryName              = { fg = colors.neon, bold = true },
 	NeoTreeFloatBorder                = { fg = colors.dark0, bg = colors.black },
 }
+
+-- Apply all highlight groups
+for group, opts in pairs(highlights) do
+	vim.api.nvim_set_hl(0, group, opts)
+end
