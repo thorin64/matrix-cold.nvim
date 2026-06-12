@@ -1,4 +1,4 @@
-asda -- matrix_cold.lua
+-- matrix_cold.lua
 -- A full Neovim IDE colorscheme based on the global system theme.
 -- Clears all existing highlights and resets syntax.
 
@@ -8,8 +8,8 @@ if vim.fn.exists("syntax_on") == 1 then
 end
 
 -- Set the theme name
-vim.g.colors_name = "matrix_cold"
-asd
+vim.g.colors_name       = "matrix_cold"
+
 -- Terminal color palette (for :terminal), matching the global theme
 vim.g.terminal_color_0  = "#002a0a"
 vim.g.terminal_color_1  = "#005515"
