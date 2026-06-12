@@ -1,5 +1,34 @@
--- Ajustes na distribuição de cores
-local highlights = {
+-- matrix_cold.lua
+-- A full Neovim IDE colorscheme based on the global system theme.
+-- Clears all existing highlights and resets syntax.
+
+vim.cmd("hi clear")
+if vim.fn.exists("syntax_on") == 1 then
+	vim.cmd("syntax reset")
+end
+
+-- Set the theme name
+vim.g.colors_name       = "matrix_cold"
+
+-- Terminal color palette (for :terminal), matching the global theme
+vim.g.terminal_color_0  = "#00330d"
+vim.g.terminal_color_1  = "#00661a"
+vim.g.terminal_color_2  = "#009927"
+vim.g.terminal_color_3  = "#00cc34"
+vim.g.terminal_color_4  = "#00ff41"
+vim.g.terminal_color_5  = "#33ff67"
+vim.g.terminal_color_6  = "#66ff8d"
+vim.g.terminal_color_7  = "#DDDDDD"
+vim.g.terminal_color_8  = "#009927"
+vim.g.terminal_color_9  = "#00cc34"
+vim.g.terminal_color_10 = "#00ff41"
+vim.g.terminal_color_11 = "#1aff54"
+vim.g.terminal_color_12 = "#4dff7a"
+vim.g.terminal_color_13 = "#80ffa0"
+vim.g.terminal_color_14 = "#b3ffc6"
+vim.g.terminal_color_15 = "#ffffff"
+
+local highlights        = {
 
 	------------------------- BASE UI -------------------------
 	Normal                            = { bg = colors.black, fg = colors.white }, -- código em branco
