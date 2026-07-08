@@ -240,7 +240,7 @@ local highlights        = {
 	["@operator"]                     = { fg = colors.light2 },
 	["@punctuation"]                  = { fg = colors.light3 },
 	["@punctuation.delimiter"]        = { fg = colors.mid },
-	["@punctuation.bracket"]          = { fg = colors.light5 },
+	["@punctuation.bracket"]          = { fg = colors.light6 },
 	["@punctuation.special"]          = { fg = colors.light2 },
 
 	["@tag"]                          = { fg = colors.light4 },
