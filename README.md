@@ -1,28 +1,110 @@
-# matrix-cold.nvim
+# [Neovim](https://neovim.io/) [Matrix](https://www.schemecolor.com/matrix-code-green.php) theme
 
-A pure, monochrome colorscheme focused on neon green for Neovim, built to simulate the aesthetics of Matrix phosphor terminals. The palette is strictly defined between absolute black and pure white, with distinct grays added for better contrast on comments and numbers, eliminating visual fatigue caused by blue or red spectrums.
+<p align="center">
+	<img src="https://raw.githubusercontent.com/iruzo/matrix-nvim/main/assets/preview.png"/>
+</p>
 
 ## Features
 
-* Strict color scale (Absolute Black -> Dark Green -> Neon Green -> White), with gray accents for code readability.
-* Global toggle to disable italics.
-* Native `Treesitter` support.
-* Built-in `Telescope` integration.
-* Optimized for Neovim >= 0.8.
++ Supported plugins:
+    + [TreeSitter](https://github.com/nvim-treesitter/nvim-treesitter)
+    + [LSP Diagnostics](https://neovim.io/doc/user/lsp.html)
+    + [Lsp Saga](https://github.com/glepnir/lspsaga.nvim)
+    + [LSP Trouble](https://github.com/folke/lsp-trouble.nvim)
+    + [Git Gutter](https://github.com/airblade/vim-gitgutter)
+    + [git-messenger](https://github.com/rhysd/git-messenger.vim)
+    + [Git Signs](https://github.com/lewis6991/gitsigns.nvim)
+    + [Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)
+    + [Nvim-Tree.lua](https://github.com/kyazdani42/nvim-tree.lua)
+    + [NERDTree](https://github.com/preservim/nerdtree)
+    + [vim-which-key](https://github.com/liuchengxu/vim-which-key)
+    + [Indent-Blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
+    + [Dashboard](https://github.com/glepnir/dashboard-nvim)
+    + [BufferLine](https://github.com/akinsho/nvim-bufferline.lua)
+    + [Lualine](https://github.com/hoob3rt/lualine.nvim)
+    + [Neogit](https://github.com/TimUntersberger/neogit)
+    + [vim-sneak](https://github.com/justinmk/vim-sneak)
+    + [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)
+
++ Ability to change background on sidebar-like windows like Nvim-Tree, Packer, terminal ...
+
+## Requirements
+
++ Neovim >= 0.5.0
 
 ## Installation
 
-Using [lazy.nvim](https://github.com/folke/lazy.nvim):
+- Plug
+```vim
+Plug 'iruzo/matrix-nvim'
+```
+- Packer
+```lua
+use 'iruzo/matrix-nvim'
+```
+- lazy
+```lua
+'iruzo/matrix-nvim',
+```
+
+## Usage
+
+Enable the colorscheme:
+- Vim-Script
+```vim
+colorscheme matrix
+```
+- Lua
+```lua
+vim.cmd[[colorscheme matrix]]
+```
+```lua
+vim.api.nvim_command "colorscheme matrix"
+```
+
+To enable the `matrix` theme for `Lualine`, simply specify it in your lualine settings:
 
 ```lua
-return {
-  "thorin64/matrix-cold.nvim",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    -- Optional: Disable italics before loading the colorscheme
-    vim.g.matrix_italic = false 
-
-    vim.cmd("colorscheme matrix-cold")
-  end,
+require('lualine').setup {
+  options = {
+    -- ... your lualine config
+    theme = 'matrix'
+    -- ... your lualine config
+  }
 }
+```
+
+## Configuration
+
+| Option                              | Default     | Description                                                                                                                                                     |
+| ----------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| matrix_contrast                     | `false`     | Make sidebars and popup menus like nvim-tree and telescope have a different background                                                                                       |
+| matrix_borders                      | `false`     | Enable the border between verticaly split windows visable
+| matrix_disable_background           | `false`     | Disable the setting of background color so that NeoVim can use your terminal background
+| matrix_cursorline_transparent       | `false`     | Set the cursorline transparent/visible
+| matrix_enable_sidebar_background    | `false`     | Re-enables the background of the sidebar if you disabled the background of everything
+| matrix_italic                       | `true`      | enables/disables italics
+
+
+```lua
+-- Example config in lua
+vim.g.matrix_contrast = true
+vim.g.matrix_borders = false
+vim.g.matrix_disable_background = false
+vim.g.matrix_italic = false
+
+-- Load the colorscheme
+require('matrix').set()
+```
+
+```vim
+" Example config in Vim-Script
+let g:matrix_contrast = v:true
+let g:matrix_borders = v:false
+let g:matrix_disable_background = v:false
+let g:matrix_italic = v:false
+
+" Load the colorscheme
+colorscheme matrix
+```
+
